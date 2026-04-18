@@ -37,7 +37,7 @@ case "$cmd" in
     uri=""; while [ $# -gt 0 ]; do case "$1" in --uri) uri="$2"; shift 2;; *) shift;; esac; done
     { read -r space; read -r id; } < <(parse "$uri")
     res=$(api GET "/api/v2/pages/$id?body-format=storage")
-    jq --arg uri "$uri" '. + {uri:$uri, kind:"confluence-page"}' <<< "$res"
+    jq --arg uri "$uri" '. + {uri:$uri, scheme:"confluence-page"}' <<< "$res"
     ;;
   create)
     data=$(if [ $# -gt 0 ] && [ "$1" = "--data" ]; then [ "$2" = "-" ] && cat || cat "$2"; fi)

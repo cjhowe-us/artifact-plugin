@@ -13,12 +13,13 @@ Artifact providers are **plain scripts, not skills**. Each ships at
 All provider calls go through the plugin's `run-provider.sh` dispatcher:
 
 ```text
-run-provider.sh <kind> <impl> <subcommand> [--flag value ...]
+run-provider.sh <URI-or-scheme> <subcommand> [--backend <name>] [--flag value ...]
 ```
 
-- `<kind>` — the artifact scheme this provider manages (`execution`, `gh-pr`, `document`, ...).
-- `<impl>` — implementation name (optional; resolves via registry when empty).
+- First arg is either a URI (`<scheme>|<backend>/<id>` — backend taken from the URI) or a
+  bare scheme (`issue`, `document`, …) which triggers backend resolution.
 - `<subcommand>` — one of the fixed set below.
+- Optional `--backend <name>` overrides resolution.
 
 The dispatcher resolves the provider's `artifact.sh`, execs it with `<subcommand>` as the first arg
 and the remaining flags as-is.
@@ -31,7 +32,7 @@ exit code + `{"error": "..."}` on stdout.
 ### `get --uri U`
 
 Read the artifact's current state. Output: a provider-defined JSON object including at minimum a
-canonical `uri`, `kind`, and `status`.
+canonical `uri`, `scheme`, and `status`.
 
 ### `create --data F`
 
@@ -76,7 +77,7 @@ other artifact schemes may map their backend state onto this enumeration (e.g. `
 ### `progress --uri U`
 
 Read the artifact's progress log. Output: `{"entries": [...]}` where each entry is
-`{at, kind, summary, ...}`. Append-only; reads never mutate.
+`{at, scheme, summary, ...}`. Append-only; reads never mutate.
 
 ### `progress --uri U --append F`
 
@@ -96,7 +97,7 @@ Append a progress entry. `F` is a JSON doc (or `-` for stdin). Output: `{"append
 
 ## Authoring a new provider
 
-1. Pick a unique kind name (`jira-issue`, `slack-thread`, `s3-object`, ...).
+1. Pick a unique scheme name (`jira-issue`, `slack-thread`, `s3-object`, ...).
 2. Scaffold at `<plugin-root>/artifact-providers/<name>/`:
    - `manifest.json` with the keys above.
    - `artifact.sh` (executable) implementing the subcommand surface.

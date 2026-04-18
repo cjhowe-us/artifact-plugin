@@ -26,7 +26,7 @@ case "$cmd" in
   get)
     uri=""; while [ $# -gt 0 ]; do case "$1" in --uri) uri="$2"; shift 2;; *) shift;; esac; done
     id=$(id_of "$uri")
-    gh api "/gists/$id" | jq --arg uri "$uri" '. + {uri:$uri, kind:"gh-gist"}'
+    gh api "/gists/$id" | jq --arg uri "$uri" '. + {uri:$uri, scheme:"gh-gist"}'
     ;;
   create)
     data=$(if [ $# -gt 0 ] && [ "$1" = "--data" ]; then [ "$2" = "-" ] && cat || cat "$2"; fi)

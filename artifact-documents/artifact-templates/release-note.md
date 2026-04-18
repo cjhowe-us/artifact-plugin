@@ -10,7 +10,7 @@ output_path: docs/releases/{{ version }}.md
 ---
 
 ---
-kind: release-note
+scheme: release-note
 version: "{{ version }}"
 released_at: "{{ released_at }}"
 ---

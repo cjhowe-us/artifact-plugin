@@ -11,7 +11,7 @@ output_path: docs/test-plans/{{ slug(title) }}.md
 ---
 
 ---
-kind: test-plan
+scheme: test-plan
 title: "{{ title }}"
 design_ref: "{{ design_ref }}"
 owner: "{{ owner }}"

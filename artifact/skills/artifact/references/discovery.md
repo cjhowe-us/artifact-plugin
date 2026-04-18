@@ -40,12 +40,12 @@ Higher precedence wins when names collide:
 
 | Scope     | Precedence | Location                                              |
 |-----------|-----------:|-------------------------------------------------------|
-| override  | 1 (top)    | `$CWD/.workflow-override/<kind>/<name>/`              |
-| workspace | 2          | `$REPO/.claude/<kind>/<name>/` (committed to repo)    |
-| user      | 3          | `~/.claude/<kind>/<name>/`                            |
-| plugin    | 4 (bot.)   | `<installed-plugin>/skills/<kind>/<name>/`            |
+| override  | 1 (top)    | `$CWD/.workflow-override/<bucket>/<name>/`              |
+| workspace | 2          | `$REPO/.claude/<bucket>/<name>/` (committed to repo)    |
+| user      | 3          | `~/.claude/<bucket>/<name>/`                            |
+| plugin    | 4 (bot.)   | `<installed-plugin>/skills/<bucket>/<name>/`            |
 
-`<kind>` in these paths is one of `workflows`, `artifact-templates`, `artifact-providers`.
+`<bucket>` in these paths is one of `workflows`, `artifact-templates`, `artifact-providers`, `artifact-backends`.
 
 Symlinks are followed. A workspace-scope workflow pointing at a checkout under `$HOME/work/...` is a
 legal setup.

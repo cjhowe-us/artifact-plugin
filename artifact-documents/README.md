@@ -17,7 +17,7 @@ Document artifact providers and a bundled set of document templates for the
 
 Follows the Claude Code skill+template convention. One skill, `document-templates`, bundles eight
 fill-in markdown shells as assets. The worker picks the matching shell by name when a workflow step
-declares `template: <name>` or when the user asks for one of these kinds.
+declares `template: <name>` or when the user asks for one of these schemes.
 
 | Template name          | Purpose                                 |
 |------------------------|------------------------------------------|

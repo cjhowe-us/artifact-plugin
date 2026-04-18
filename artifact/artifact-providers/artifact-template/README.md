@@ -38,4 +38,4 @@ Optional frontmatter fields:
 
 ## Backends
 
-Any backend that can store text files can back the `artifact-template` kind. `local-filesystem` (this plugin) stores templates at `<worktree>/artifact-templates/<name>.md`. Plugin-shipped templates live in the plugin's `artifact-templates/` directory and are discoverable by name.
+Any backend that can store text files can back the `artifact-template` scheme. `local-filesystem` (this plugin) stores templates at `<worktree>/artifact-templates/<name>.md`. Plugin-shipped templates live in the plugin's `artifact-templates/` directory and are discoverable by name.

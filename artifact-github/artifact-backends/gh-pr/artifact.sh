@@ -32,7 +32,7 @@ case "$cmd" in
     uri=""; while [ $# -gt 0 ]; do case "$1" in --uri) uri="$2"; shift 2;; *) shift;; esac; done
     { read -r repo; read -r n; } < <(parse_uri "$uri")
     gh pr view "$n" --repo "$repo" --json number,title,body,state,isDraft,assignees,url,baseRefName,headRefName,mergedAt,closedAt \
-      | jq --arg uri "$uri" '. + {uri:$uri, kind:"gh-pr"}'
+      | jq --arg uri "$uri" '. + {uri:$uri, scheme:"gh-pr"}'
     ;;
   create)
     data_path=""; while [ $# -gt 0 ]; do case "$1" in --data) data_path="$2"; shift 2;; *) shift;; esac; done

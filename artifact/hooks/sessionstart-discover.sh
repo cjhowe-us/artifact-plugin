@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # sessionstart-discover.sh
 #
-# Build a registry of installed artifact providers (kinds), backends,
+# Build a registry of installed artifact providers (schemes), backends,
 # templates, and workflows from every installed plugin plus
 # workspace / user / override scopes.
 #
@@ -87,7 +87,7 @@ extract_yaml_frontmatter() {
 walk_scope() {
   local scope="$1" root="$2"
 
-  # artifact-providers (kinds)
+  # artifact-providers (schemes)
   for path in "$root"/artifact-providers/*/manifest.json; do
     [ -f "$path" ] || continue
     fm=$(cat "$path")

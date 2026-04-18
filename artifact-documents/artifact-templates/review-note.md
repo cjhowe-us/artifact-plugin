@@ -11,7 +11,7 @@ output_path: docs/reviews/{{ slug(subject) }}-review.md
 ---
 
 ---
-kind: review-note
+scheme: review-note
 subject_ref: "{{ subject_ref }}"
 reviewer: "{{ reviewer }}"
 verdict: pending

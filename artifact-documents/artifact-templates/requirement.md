@@ -11,7 +11,7 @@ output_path: docs/requirements/{{ id }}.md
 ---
 
 ---
-kind: requirement
+scheme: requirement
 id: "{{ id }}"
 title: "{{ title }}"
 priority: "{{ priority }}"

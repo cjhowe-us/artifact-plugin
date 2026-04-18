@@ -27,7 +27,7 @@ case "$cmd" in
     uri=""; while [ $# -gt 0 ]; do case "$1" in --uri) uri="$2"; shift 2;; *) shift;; esac; done
     { read -r repo; read -r tag; } < <(parse "$uri")
     gh release view "$tag" --repo "$repo" --json name,tagName,body,isDraft,isPrerelease,publishedAt,url \
-      | jq --arg uri "$uri" '. + {uri:$uri, kind:"gh-release"}'
+      | jq --arg uri "$uri" '. + {uri:$uri, scheme:"gh-release"}'
     ;;
   create)
     data=$(if [ $# -gt 0 ] && [ "$1" = "--data" ]; then [ "$2" = "-" ] && cat || cat "$2"; fi)

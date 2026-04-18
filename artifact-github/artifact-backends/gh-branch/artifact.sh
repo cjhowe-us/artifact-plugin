@@ -29,7 +29,7 @@ case "$cmd" in
   get)
     uri=""; while [ $# -gt 0 ]; do case "$1" in --uri) uri="$2"; shift 2;; *) shift;; esac; done
     { read -r repo; read -r br; } < <(parse "$uri")
-    gh api "/repos/$repo/branches/$br" | jq --arg uri "$uri" '. + {uri:$uri, kind:"gh-branch"}'
+    gh api "/repos/$repo/branches/$br" | jq --arg uri "$uri" '. + {uri:$uri, scheme:"gh-branch"}'
     ;;
   create)
     data=$(if [ $# -gt 0 ] && [ "$1" = "--data" ]; then [ "$2" = "-" ] && cat || cat "$2"; fi)

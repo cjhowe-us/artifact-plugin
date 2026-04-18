@@ -5,7 +5,7 @@ as the primary backend.
 
 ## Providers
 
-| Name          | URI shape                              | Kind                        |
+| Name          | URI shape                              | Scheme                        |
 |---------------|----------------------------------------|------------------------------|
 | `gh-pr`       | `gh-pr:<owner>/<repo>/<n>`             | PR (assignee = owner lock)   |
 | `gh-issue`    | `gh-issue:<owner>/<repo>/<n>`          | Issue (assignee = owner lock)|
@@ -28,8 +28,8 @@ Requires `workflow >= 1.0.0` and the `gh` CLI (`gh auth login`).
 
 ## Defaults
 
-When the core plugin's `execution` provider looks up an implementation for `execution:`-kind URIs,
-it resolves to `gh-pr` (since PRs are the natural backing). Other kinds resolve by name match.
+When the core plugin's `execution` provider looks up an implementation for `execution:`-scheme URIs,
+it resolves to `gh-pr` (since PRs are the natural backing). Other schemes resolve by name match.
 
 ## License
 

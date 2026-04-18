@@ -12,7 +12,7 @@ output_path: docs/triage/{{ slug(title) }}.md
 ---
 
 ---
-kind: triage-note
+scheme: triage-note
 incident_ref: "{{ incident_ref }}"
 triaged_by: "{{ triaged_by }}"
 severity: "{{ severity }}"

@@ -3,7 +3,7 @@
 #
 # Validate an artifact provider (scheme) directory against the contract.
 #
-# Providers (kinds) ship the TYPE definition of an artifact.
+# Providers (schemes) ship the TYPE definition of an artifact.
 # They do not ship executable code — backends do that.
 #
 # Checks:

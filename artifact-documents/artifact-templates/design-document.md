@@ -10,7 +10,7 @@ output_path: docs/design/{{ slug(title) }}.md
 ---
 
 ---
-kind: design-document
+scheme: design-document
 title: "{{ title }}"
 authors: ["{{ author }}"]
 status: draft

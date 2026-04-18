@@ -13,7 +13,7 @@ output_path: docs/user-stories/{{ id }}.md
 ---
 
 ---
-kind: user-story
+scheme: user-story
 id: "{{ id }}"
 title: "{{ title }}"
 ---
