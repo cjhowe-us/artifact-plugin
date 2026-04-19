@@ -10,8 +10,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  lint:
-    name: ruff
+  ruff:
+    name: ruff check + format
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,8 +19,8 @@ jobs:
       - run: uvx ruff check .
       - run: uvx ruff format --check .
 
-  typecheck:
-    name: mypy
+  mypy:
+    name: mypy --strict
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -32,6 +32,27 @@ jobs:
             --with "tomlkit>=0.13" \
             --with "jinja2>=3.1" \
             mypy --config-file pyproject.toml
+
+  pyright:
+    name: pyright
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv venv .venv --python 3.12
+      - run: uv pip install --python .venv/bin/python "pydantic>=2,<3" "tomlkit>=0.13" "jinja2>=3.1" "pytest>=8"
+      - run: uvx pyright
+
+  pre-commit:
+    name: pre-commit (new-file-tests + aggregate)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # pre-commit needs history for diff-against-main
+      - uses: astral-sh/setup-uv@v5
+      - run: uv python install 3.12
+      - run: uvx pre-commit run --all-files --show-diff-on-failure
 
   test:
     name: pytest ${{ matrix.os }} py${{ matrix.python }}
@@ -63,7 +84,7 @@ jobs:
           git config --global user.email "ci@example.com"
           git config --global user.name "CI"
 
-      - name: Run pytest
+      - name: Run pytest with coverage
         shell: bash
         run: |
           uv run --python ${{ matrix.python }} \
@@ -79,4 +100,14 @@ jobs:
               --cov=artifact-github-plugin/scripts \
               --cov=artifact-documents-plugin/scripts \
               --cov-report=term \
+              --cov-report=xml \
+              --cov-fail-under=75 \
               artifact-plugin/tests artifact-documents-plugin/tests artifact-github-plugin/tests
+
+      - name: Upload coverage.xml
+        if: always() && matrix.os == 'ubuntu-latest' && matrix.python == '3.12'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-xml
+          path: coverage.xml
+          if-no-files-found: ignore
